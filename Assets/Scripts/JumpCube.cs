@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpCube : MonoBehaviour
 {
     private Rigidbody rb;
+    private int hitCounter;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -13,6 +14,14 @@ public class JumpCube : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
             rb.AddForce(new Vector3(0f, 10f, 0f), ForceMode.Impulse);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Environment"))
+        {
+            hitCounter += 1;
+            Debug.Log(hitCounter);
+        }
     }
     private void FixedUpdate()
     {
